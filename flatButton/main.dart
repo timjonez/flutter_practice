@@ -20,13 +20,13 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: Colors.blue,
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'First App'),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -51,7 +51,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  int _selectedIndex = 1;
 
   void _incrementCounter() {
     setState(() {
@@ -64,15 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void CallContact(){
-    print('Calling...');
-  }
-
-  void ItemTapped(int index)
-  {
-    setState(() {
-      _selectedIndex = index;
-    });
+  void ButtonClick(){
+    print('Button clicked');
   }
 
   @override
@@ -83,29 +75,26 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          pinned: true,
-          expandedHeight: 150,
-          flexibleSpace: FlexibleSpaceBar(
-            title: Text('Epic!!'),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: FlatButton(
+          onPressed: ButtonClick,
+          child: Text('Click Here'),
+          color: Colors.red,
+          textColor: Colors.white,
+          highlightColor: Colors.amber,
         ),
-        SliverFixedExtentList(
-          itemExtent: 50.0,
-          delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index){
-                return Container(
-                  alignment: Alignment.center,
-                  color: Colors.cyanAccent,
-                  child: Text('List item $index'),
-                );
-              },
-            childCount: 20,
-          ),
-        )
-      ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
